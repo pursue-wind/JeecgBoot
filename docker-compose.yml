@@ -46,18 +46,18 @@ services:
       - 8080:8080
     networks:
       - jeecg-boot
-  jeecg-vue:
-    build:
-      context: ./jeecgboot-vue3
-    container_name: jeecgboot-vue3-nginx
-    image: jeecgboot-vue3
-    depends_on:
-      - jeecg-boot-system
-    networks:
-      - jeecg-boot
-    ports:
-      - 80:80
+#  jeecg-vue:
+#    build:
+#      context: ./jeecgboot-vue3
+#    container_name: jeecgboot-vue3-nginx
+#    image: jeecgboot-vue3
+#    depends_on:
+#      - jeecg-boot-system
+#    networks:
+#      - jeecg-boot
+#    ports:
+#      - 80:80
 
 networks:
   jeecg-boot:
-    name: jeecg_boot
+    driver: bridge
