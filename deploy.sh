@@ -64,13 +64,13 @@ deploy_frontend() {
         error_exit "前端项目构建失败！"
     fi
 
-    log "开始部署前端到 Nginx..."
-    log "备份当前 Nginx html 文件夹..."
-    if tar -zcvf /var/www/html/html.tar.gz /var/www/html/; then
-        log "备份完成。"
-    else
-        error_exit "备份失败！"
-    fi
+#    log "开始部署前端到 Nginx..."
+#    log "备份当前 Nginx html 文件夹..."
+#    if tar -zcvf /var/www/html/html.tar.gz /var/www/html/; then
+#        log "备份完成。"
+#    else
+#        error_exit "备份失败！"
+#    fi
 
     log "拷贝前端构建产物到 /var/www/html/..."
     if cp -r /root/idea/JeecgBoot/jeecgboot-vue3/dist/* /var/www/html/; then
