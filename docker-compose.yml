@@ -19,8 +19,8 @@ services:
       --default-authentication-plugin=caching_sha2_password
     ports:
       - 3306:3306
-    volumes:
-      - ./mysql_data:/var/lib/mysql
+#    volumes:
+#      - ./mysql_data:/var/lib/mysql
     networks:
       - jeecg-boot
 
@@ -48,6 +48,7 @@ services:
       - 8080:8080
     volumes:
       - ./system_data:/jeecg_boot_data
+      - ../JeecgBoot:/jeecg_boot_project
     networks:
       - jeecg-boot
 #  jeecg-vue:
