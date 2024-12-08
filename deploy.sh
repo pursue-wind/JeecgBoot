@@ -120,10 +120,20 @@ main() {
             --backend)
                 build_backend=true
                 ;;
+            --b)
+                build_backend=true
+                ;;
             --frontend)
                 build_frontend=true
                 ;;
+            --f)
+                build_frontend=true
+                ;;
             --all)
+                build_backend=true
+                build_frontend=true
+                ;;
+            --a)
                 build_backend=true
                 build_frontend=true
                 ;;
