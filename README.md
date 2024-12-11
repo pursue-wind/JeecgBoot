@@ -476,13 +476,3 @@ JeecgBoot开源版本，底层完全开源可以自主开发，遵循Apache2.0�
 ![](https://oscimg.oschina.net/oscnet/up-4868615395272d3206dbb960ade02dbc291.png)
 
 
-
-
-
-
-
-## 捐赠 
-
-如果觉得还不错，请作者喝杯咖啡吧 ☺
-
-![](https://static.oschina.net/uploads/img/201903/08155608_0EFX.png)
