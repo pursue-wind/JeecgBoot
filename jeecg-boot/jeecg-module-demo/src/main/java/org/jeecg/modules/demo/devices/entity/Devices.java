@@ -21,22 +21,22 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 设备
+ * @Description: devices
  * @Author: jeecg-boot
- * @Date:   2024-12-08
+ * @Date:   2024-12-12
  * @Version: V1.0
  */
 @Data
 @TableName("devices")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="devices对象", description="设备")
+@ApiModel(value="devices对象", description="devices")
 public class Devices implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	/**主键*/
+	/**id*/
 	@TableId(type = IdType.ASSIGN_ID)
-    @ApiModelProperty(value = "主键")
+    @ApiModelProperty(value = "id")
     private java.lang.String id;
 	/**创建日期*/
 	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
@@ -60,4 +60,8 @@ public class Devices implements Serializable {
 	@Excel(name = "wechat open id", width = 15)
     @ApiModelProperty(value = "wechat open id")
     private java.lang.String openId;
+	/**是否启用*/
+    @Excel(name = "是否启用", width = 15,replace = {"是_1","否_2"} )
+    @ApiModelProperty(value = "是否启用")
+    private java.lang.Integer en;
 }

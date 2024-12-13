@@ -22,12 +22,17 @@
 						</a-col>
 						<a-col :span="24">
 							<a-form-item label="img url" v-bind="validateInfos.img" id="ResourcesForm-img" name="img">
-								<a-input v-model:value="formData.img" placeholder="请输入img url"  allow-clear ></a-input>
+								<j-image-upload :fileMax="0" v-model:value="formData.img" ></j-image-upload>
+							</a-form-item>
+						</a-col>
+						<a-col :span="24">
+							<a-form-item label="gif url" v-bind="validateInfos.gif" id="ResourcesForm-gif" name="gif">
+								<j-image-upload :fileMax="0" v-model:value="formData.gif" ></j-image-upload>
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
 							<a-form-item label="mp3 url" v-bind="validateInfos.au" id="ResourcesForm-au" name="au">
-								<a-input v-model:value="formData.au" placeholder="请输入mp3 url"  allow-clear ></a-input>
+								<j-upload v-model:value="formData.au"   ></j-upload>
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
@@ -47,6 +52,8 @@
   import { defHttp } from '/@/utils/http/axios';
   import { useMessage } from '/@/hooks/web/useMessage';
   import JTreeSelect from '/@/components/Form/src/jeecg/components/JTreeSelect.vue';
+  import JUpload from '/@/components/Form/src/jeecg/components/JUpload/JUpload.vue';
+  import JImageUpload from '/@/components/Form/src/jeecg/components/JImageUpload.vue';
   import { getValueType } from '/@/utils';
   import { saveOrUpdate } from '../Resources.api';
   import { Form } from 'ant-design-vue';
@@ -64,6 +71,7 @@
     cid: '',   
     name: '',   
     img: '',   
+    gif: '',   
     au: '',   
     txt: '',   
   });

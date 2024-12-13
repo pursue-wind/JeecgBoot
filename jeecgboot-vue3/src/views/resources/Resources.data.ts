@@ -18,12 +18,19 @@ export const columns: BasicColumn[] = [
   {
     title: 'img url',
     align: "center",
-    dataIndex: 'img'
+    dataIndex: 'img',
+    customRender: render.renderImage,
+  },
+  {
+    title: 'gif url',
+    align: "center",
+    dataIndex: 'gif',
+    customRender: render.renderImage,
   },
   {
     title: 'mp3 url',
     align: "center",
-    dataIndex: 'au'
+    dataIndex: 'au',
   },
   {
     title: '资源详情',
@@ -36,7 +43,8 @@ export const columns: BasicColumn[] = [
 export const superQuerySchema = {
   cid: {title: '分类ID',order: 0,view: 'sel_tree', type: 'string',dict: 'sys_category,name,id', pidValue: '0',},
   name: {title: '资源名',order: 1,view: 'text', type: 'string',},
-  img: {title: 'img url',order: 2,view: 'text', type: 'string',},
-  au: {title: 'mp3 url',order: 3,view: 'text', type: 'string',},
-  txt: {title: '资源详情',order: 4,view: 'text', type: 'string',},
+  img: {title: 'img url',order: 2,view: 'image', type: 'string',},
+  gif: {title: 'gif url',order: 3,view: 'image', type: 'string',},
+  au: {title: 'mp3 url',order: 4,view: 'file', type: 'string',},
+  txt: {title: '资源详情',order: 5,view: 'text', type: 'string',},
 };

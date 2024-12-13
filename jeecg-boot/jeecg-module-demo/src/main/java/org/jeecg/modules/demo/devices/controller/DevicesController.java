@@ -40,12 +40,12 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
  /**
- * @Description: 设备
+ * @Description: devices
  * @Author: jeecg-boot
- * @Date:   2024-12-08
+ * @Date:   2024-12-12
  * @Version: V1.0
  */
-@Api(tags="设备")
+@Api(tags="devices")
 @RestController
 @RequestMapping("/devices/devices")
 @Slf4j
@@ -62,8 +62,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param req
 	 * @return
 	 */
-	//@AutoLog(value = "设备-分页列表查询")
-	@ApiOperation(value="设备-分页列表查询", notes="设备-分页列表查询")
+	//@AutoLog(value = "devices-分页列表查询")
+	@ApiOperation(value="devices-分页列表查询", notes="devices-分页列表查询")
 	@GetMapping(value = "/list")
 	public Result<IPage<Devices>> queryPageList(Devices devices,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -81,8 +81,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param devices
 	 * @return
 	 */
-	@AutoLog(value = "设备-添加")
-	@ApiOperation(value="设备-添加", notes="设备-添加")
+	@AutoLog(value = "devices-添加")
+	@ApiOperation(value="devices-添加", notes="devices-添加")
 	@RequiresPermissions("devices:devices:add")
 	@PostMapping(value = "/add")
 	public Result<String> add(@RequestBody Devices devices) {
@@ -96,8 +96,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param devices
 	 * @return
 	 */
-	@AutoLog(value = "设备-编辑")
-	@ApiOperation(value="设备-编辑", notes="设备-编辑")
+	@AutoLog(value = "devices-编辑")
+	@ApiOperation(value="devices-编辑", notes="devices-编辑")
 	@RequiresPermissions("devices:devices:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
 	public Result<String> edit(@RequestBody Devices devices) {
@@ -111,8 +111,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "设备-通过id删除")
-	@ApiOperation(value="设备-通过id删除", notes="设备-通过id删除")
+	@AutoLog(value = "devices-通过id删除")
+	@ApiOperation(value="devices-通过id删除", notes="devices-通过id删除")
 	@RequiresPermissions("devices:devices:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
@@ -126,8 +126,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "设备-批量删除")
-	@ApiOperation(value="设备-批量删除", notes="设备-批量删除")
+	@AutoLog(value = "devices-批量删除")
+	@ApiOperation(value="devices-批量删除", notes="devices-批量删除")
 	@RequiresPermissions("devices:devices:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
@@ -141,8 +141,8 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
 	 * @param id
 	 * @return
 	 */
-	//@AutoLog(value = "设备-通过id查询")
-	@ApiOperation(value="设备-通过id查询", notes="设备-通过id查询")
+	//@AutoLog(value = "devices-通过id查询")
+	@ApiOperation(value="devices-通过id查询", notes="devices-通过id查询")
 	@GetMapping(value = "/queryById")
 	public Result<Devices> queryById(@RequestParam(name="id",required=true) String id) {
 		Devices devices = devicesService.getById(id);
@@ -161,7 +161,7 @@ public class DevicesController extends JeecgController<Devices, IDevicesService>
     @RequiresPermissions("devices:devices:exportXls")
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, Devices devices) {
-        return super.exportXls(request, devices, Devices.class, "设备");
+        return super.exportXls(request, devices, Devices.class, "devices");
     }
 
     /**

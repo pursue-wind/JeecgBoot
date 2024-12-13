@@ -61,6 +61,10 @@ public class Resources implements Serializable {
 	@Excel(name = "img url", width = 15)
     @ApiModelProperty(value = "img url")
     private java.lang.String img;
+	/**gif url*/
+	@Excel(name = "gif url", width = 15)
+    @ApiModelProperty(value = "gif url")
+    private java.lang.String gif;
 	/**mp3 url*/
 	@Excel(name = "mp3 url", width = 15)
     @ApiModelProperty(value = "mp3 url")

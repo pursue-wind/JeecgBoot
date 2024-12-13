@@ -19,6 +19,11 @@
 								<a-input v-model:value="formData.openId" placeholder="请输入wechat open id"  allow-clear ></a-input>
 							</a-form-item>
 						</a-col>
+						<a-col :span="24">
+							<a-form-item label="是否启用" v-bind="validateInfos.en" id="DevicesForm-en" name="en">
+								<j-switch v-model:value="formData.en" :options="[1,2]" ></j-switch>
+							</a-form-item>
+						</a-col>
           </a-row>
         </a-form>
       </template>
@@ -30,6 +35,7 @@
   import { ref, reactive, defineExpose, nextTick, defineProps, computed, onMounted } from 'vue';
   import { defHttp } from '/@/utils/http/axios';
   import { useMessage } from '/@/hooks/web/useMessage';
+  import JSwitch from '/@/components/Form/src/jeecg/components/JSwitch.vue';
   import { getValueType } from '/@/utils';
   import { saveOrUpdate } from '../Devices.api';
   import { Form } from 'ant-design-vue';
@@ -47,6 +53,7 @@
     deviceId: '',   
     deviceType: '',   
     openId: '',   
+    en: undefined,
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
@@ -54,6 +61,7 @@
   const confirmLoading = ref<boolean>(false);
   //表单验证
   const validatorRules = reactive({
+    en: [{ required: true, message: '请输入是否启用!'},],
   });
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: false });
 

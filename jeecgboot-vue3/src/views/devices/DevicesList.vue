@@ -51,6 +51,7 @@
   import { downloadFile } from '/@/utils/common/renderUtils';
   import DevicesModal from './components/DevicesModal.vue'
   import { useUserStore } from '/@/store/modules/user';
+  import JSwitch from '/@/components/Form/src/jeecg/components/JSwitch.vue';
 
   const formRef = ref();
   const queryParam = reactive<any>({});
@@ -60,7 +61,7 @@
   //注册table数据
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
-      title: '设备',
+      title: 'devices',
       api: list,
       columns,
       canResize:false,
@@ -74,7 +75,7 @@
       },
     },
     exportConfig: {
-      name: "设备",
+      name: "devices",
       url: getExportUrl,
       params: queryParam,
     },
