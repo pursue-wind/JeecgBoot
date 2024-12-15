@@ -126,7 +126,7 @@ public class RegController {
             user.setStatus(CommonConstant.USER_UNFREEZE);
             user.setDelFlag(CommonConstant.DEL_FLAG_0);
             user.setActivitiSync(CommonConstant.ACT_SYNC_1);
-            sysUserService.addUserWithRole(user, "admin");//默认临时角色 test
+            sysUserService.addUserWithRole(user, "1169504891467464705");//默认临时角色 test
             Devices entity = new Devices();
             entity.setDeviceId(deviceId);
             entity.setOpenId(openId);

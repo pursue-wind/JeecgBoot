@@ -132,7 +132,46 @@ public class LoginController {
 		return result;
 	}
 
+	@ApiOperation("登录接口2")
+	@RequestMapping(value = "/login2", method = RequestMethod.POST)
+	public Result<JSONObject> login2(@RequestBody SysLoginModel sysLoginModel, HttpServletRequest request){
+		Result<JSONObject> result = new Result<JSONObject>();
+		String username = sysLoginModel.getUsername();
+		String password = sysLoginModel.getPassword();
+		if(isLoginFailOvertimes(username)){
+			return result.error500("该用户登录失败次数过多，请于10分钟后再次登录！");
+		}
 
+		// step.2 校验用户是否存在且有效
+		LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+		queryWrapper.eq(SysUser::getUsername,username);
+		SysUser sysUser = sysUserService.getOne(queryWrapper);
+		result = sysUserService.checkUserIsEffective(sysUser);
+		if(!result.isSuccess()) {
+			return result;
+		}
+
+		// step.3 校验用户名或密码是否正确
+		String userpassword = PasswordUtil.encrypt(username, password, sysUser.getSalt());
+		String syspassword = sysUser.getPassword();
+		if (!syspassword.equals(userpassword)) {
+			addLoginFailOvertimes(username);
+			result.error500("用户名或密码错误");
+			return result;
+		}
+
+		// step.4  登录成功获取用户信息
+		userInfo(sysUser, result, request);
+
+		// step.5  登录成功删除验证码
+		redisUtil.del(CommonConstant.LOGIN_FAIL + username);
+
+		// step.6  记录用户登录日志
+		LoginUser loginUser = new LoginUser();
+		BeanUtils.copyProperties(sysUser, loginUser);
+		baseCommonService.addLog("用户名: " + username + ",登录成功！", CommonConstant.LOG_TYPE_1, null,loginUser);
+		return result;
+	}
 	/**
 	 * 【vue3专用】获取用户信息
 	 */
