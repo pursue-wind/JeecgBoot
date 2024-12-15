@@ -13,10 +13,10 @@ public class  EncryptedString {
     /**
      * 长度为16个字符
      */
-    public static  String key = "1234567890adbcde123qweasasdfa";
+    public static  String key = "qwer1234567890za";
 
     /**
      * 长度为16个字符
      */
-    public static  String iv  = "1234567890hjlkew123qweasasdfa";
+    public static  String iv  = "aiop1234567890as";
 }

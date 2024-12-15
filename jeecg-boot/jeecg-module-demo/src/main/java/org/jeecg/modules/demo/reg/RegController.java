@@ -1,9 +1,10 @@
-package org.jeecg.modules.demo.online;
+package org.jeecg.modules.demo.reg;
 
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableMap;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CommonConstant;
@@ -12,7 +13,6 @@ import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.encryption.AesEncryptUtil;
 import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.base.service.BaseCommonService;
 import org.jeecg.modules.demo.devices.entity.Devices;
 import org.jeecg.modules.demo.devices.service.IDevicesService;
 import org.jeecg.modules.system.entity.SysUser;
@@ -86,6 +86,7 @@ public class RegController {
      * @param user
      * @return
      */
+    @ApiOperation(value="注册设备", notes="json 传 id：deviceId，openId，c：aes加密的deviceId，返回 aksk 用于登录")
     @PostMapping("/reg")
     public Result<JSONObject> deviceRegister(@RequestBody JSONObject jsonObject, SysUser user) {
         Result<JSONObject> result = new Result<JSONObject>();
