@@ -133,9 +133,26 @@ public class PasswordUtil {
 		}
 
 		catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		return new String(passDec);
+	}
+
+	public static void main(String[] args) {
+//		abcdefgh12345678,abcdefgh12345678,0df5bf8f3501b8f59aa86c54830bb92731a36b01339d8655,8mdEiNiE
+//				abcdefgh12345679,abcdefgh12345679,caa966b9d45c3f6fd85ffa0cdf292c19b4784686c97bcf18,kuA2gSpN
+//		123qaqweqwe,123qaqweqwe,8a5328302b0559071b4f394b794614ee,zHIblluE
+//		abcdefgh12345000,abcdefgh12345000,3614d6fb768768e01db2de28b25e16be51e2dd3669a59a5f,egoSa74I
+//		abcdefgh12345111,abcdefgh12345111,edc8dd3bc5c0e693414911c847380890f98d3941f91b0648,etrwOKg7
+//		abcdefgh12345001,abcdefgh12345001,dd0b9e2152b1cfd6e3ae2af218f544f50c7bfb8fc60379f5,agNdQck7
+//		zhangsan,张三,02ea098224c7d0d2077c14b9a3a1ed16,x5xRdeKB
+//		jeecg,jeecg,eee378a1258530cb,mIgiYJow
+//		admin,管理员,105933336f832518,AQAuHDkT
+
+
+		String decrypt = decrypt("abcdefgh12345001", "dd0b9e2152b1cfd6e3ae2af218f544f50c7bfb8fc60379f5", "agNdQck7");
+		System.out.println(decrypt);
 	}
 
 	/**

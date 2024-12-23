@@ -109,11 +109,10 @@ public class RegController {
         SysUser sysUser1 = sysUserService.getUserByName(deviceId);
         if (sysUser1 != null) {
             result.setMessage("用户名已注册");
-            String passwordDecode = PasswordUtil.decrypt(sysUser1.getUsername(), sysUser1.getPassword(), sysUser1.getSalt());
-            result.setSuccess(true);
+             result.setSuccess(true);
             Map<String, Object> data = ImmutableMap.of(
                     "ak", deviceId,
-                    "sk", passwordDecode
+                    "sk", sysUser1.getEmail()
             );
             return Result.OK(new JSONObject(data));
         }
@@ -126,7 +125,7 @@ public class RegController {
             user.setUsername(deviceId);
             user.setRealname(deviceId);
             user.setPassword(passwordEncode);
-            user.setEmail(deviceId);
+            user.setEmail(password);
             user.setPhone(deviceId);
             user.setStatus(CommonConstant.USER_UNFREEZE);
             user.setDelFlag(CommonConstant.DEL_FLAG_0);
@@ -142,7 +141,7 @@ public class RegController {
 
             Map<String, Object> data = ImmutableMap.of(
                     "ak", deviceId,
-                    "sk", passwordEncode
+                    "sk", password
             );
             return Result.OK(new JSONObject(data));
         } catch (Exception e) {
