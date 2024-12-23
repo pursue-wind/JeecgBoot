@@ -581,10 +581,10 @@ public class LoginController {
 
 		//update-begin---author:scott ---date:2024-01-05  for：【QQYUN-7802】前端在登录时加载了两次数据字典，建议优化下，避免数据字典太多时可能产生的性能问题 #956---
 		// login接口，在vue3前端下不加载字典数据，vue2下加载字典
-		String vue3Version = request.getHeader(CommonConstant.VERSION);
-		if(oConvertUtils.isEmpty(vue3Version)){
-			obj.put("sysAllDictItems", sysDictService.queryAllDictItems());
-		}
+//		String vue3Version = request.getHeader(CommonConstant.VERSION);
+//		if(oConvertUtils.isEmpty(vue3Version)){
+//			obj.put("sysAllDictItems", sysDictService.queryAllDictItems());
+//		}
 		//end-begin---author:scott ---date:2024-01-05  for：【QQYUN-7802】前端在登录时加载了两次数据字典，建议优化下，避免数据字典太多时可能产生的性能问题 #956---
 
 		result.setResult(obj);
