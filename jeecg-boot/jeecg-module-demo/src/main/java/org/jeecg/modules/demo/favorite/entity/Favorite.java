@@ -1,4 +1,4 @@
-package org.jeecg.modules.demo.alarm.entity;
+package org.jeecg.modules.demo.favorite.entity;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -21,17 +21,17 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: alarm
+ * @Description: favorite
  * @Author: jeecg-boot
- * @Date:   2024-12-22
+ * @Date:   2024-12-23
  * @Version: V1.0
  */
 @Data
-@TableName("alarm")
+@TableName("favorite")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="alarm对象", description="alarm")
-public class Alarm implements Serializable {
+@ApiModel(value="favorite对象", description="favorite")
+public class Favorite implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	/**id*/
@@ -52,41 +52,21 @@ public class Alarm implements Serializable {
 	@Excel(name = "device_id", width = 15)
     @ApiModelProperty(value = "device_id")
     private java.lang.String deviceId;
-	/**提醒时间*/
-	@Excel(name = "提醒时间", width = 15)
-    @ApiModelProperty(value = "提醒时间")
-    private java.lang.String alarmTime;
-	/**周一到周日分别对应 2 4 8 16 32 64 128*/
-	@Excel(name = "周一到周日分别对应 2 4 8 16 32 64 128", width = 15)
-    @ApiModelProperty(value = "周一到周日分别对应 2 4 8 16 32 64 128")
-    private java.lang.Integer alarmDate;
 	/**关联的类型*/
-	@Excel(name = "关联的类型", width = 15, dicCode = "alarm_type")
-	@Dict(dicCode = "alarm_type")
+	@Excel(name = "关联的类型", width = 15, dicCode = "fav_type")
+	@Dict(dicCode = "fav_type")
     @ApiModelProperty(value = "关联的类型")
-    private java.lang.Integer relaType;
-	/**关联类型对应的id*/
-	@Excel(name = "关联类型对应的id", width = 15)
-    @ApiModelProperty(value = "关联类型对应的id")
-    private java.lang.String relaId;
-	/**提醒对应的标题文本*/
-	@Excel(name = "提醒对应的标题文本", width = 15)
-    @ApiModelProperty(value = "提醒对应的标题文本")
+    private java.lang.Integer favType;
+	/**标题*/
+	@Excel(name = "标题", width = 15)
+    @ApiModelProperty(value = "标题")
     private java.lang.String title;
 	/**描述*/
 	@Excel(name = "描述", width = 15)
     @ApiModelProperty(value = "描述")
-    private java.lang.String descTxt;
-	/**是否重复*/
-    @Excel(name = "是否重复", width = 15,replace = {"是_1","否_2"} )
-    @ApiModelProperty(value = "是否重复")
-    private java.lang.Integer isRepeat;
+    private java.lang.String txt;
 	/**是否启用*/
     @Excel(name = "是否启用", width = 15,replace = {"是_1","否_2"} )
     @ApiModelProperty(value = "是否启用")
     private java.lang.Integer isOpen;
-	/**是否完成*/
-    @Excel(name = "是否完成", width = 15,replace = {"是_1","否_2"} )
-    @ApiModelProperty(value = "是否完成")
-    private java.lang.Integer isFinish;
 }

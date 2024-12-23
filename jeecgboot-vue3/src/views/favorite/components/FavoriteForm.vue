@@ -2,56 +2,31 @@
   <a-spin :spinning="confirmLoading">
     <JFormContainer :disabled="disabled">
       <template #detail>
-        <a-form ref="formRef" class="antd-modal-form" :labelCol="labelCol" :wrapperCol="wrapperCol" name="AlarmForm">
+        <a-form ref="formRef" class="antd-modal-form" :labelCol="labelCol" :wrapperCol="wrapperCol" name="FavoriteForm">
           <a-row>
 						<a-col :span="24">
-							<a-form-item label="device_id" v-bind="validateInfos.deviceId" id="AlarmForm-deviceId" name="deviceId">
+							<a-form-item label="device_id" v-bind="validateInfos.deviceId" id="FavoriteForm-deviceId" name="deviceId">
 								<a-input v-model:value="formData.deviceId" placeholder="请输入device_id"  allow-clear ></a-input>
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
-							<a-form-item label="提醒时间" v-bind="validateInfos.alarmTime" id="AlarmForm-alarmTime" name="alarmTime">
-								<a-input v-model:value="formData.alarmTime" placeholder="请输入提醒时间"  allow-clear ></a-input>
+							<a-form-item label="关联的类型" v-bind="validateInfos.favType" id="FavoriteForm-favType" name="favType">
+								<j-dict-select-tag type='radio' v-model:value="formData.favType" dictCode="fav_type" placeholder="请选择关联的类型"  allow-clear />
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
-							<a-form-item label="周一到周日分别对应 2 4 8 16 32 64 128" v-bind="validateInfos.alarmDate" id="AlarmForm-alarmDate" name="alarmDate">
-								<a-input-number v-model:value="formData.alarmDate" placeholder="请输入周一到周日分别对应 2 4 8 16 32 64 128" style="width: 100%" />
+							<a-form-item label="标题" v-bind="validateInfos.title" id="FavoriteForm-title" name="title">
+								<a-input v-model:value="formData.title" placeholder="请输入标题"  allow-clear ></a-input>
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
-							<a-form-item label="关联的类型" v-bind="validateInfos.relaType" id="AlarmForm-relaType" name="relaType">
-								<j-dict-select-tag type='radio' v-model:value="formData.relaType" dictCode="alarm_type" placeholder="请选择关联的类型"  allow-clear />
+							<a-form-item label="描述" v-bind="validateInfos.txt" id="FavoriteForm-txt" name="txt">
+								<a-textarea v-model:value="formData.txt" :rows="4" placeholder="请输入描述" />
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
-							<a-form-item label="关联类型对应的id" v-bind="validateInfos.relaId" id="AlarmForm-relaId" name="relaId">
-								<a-input v-model:value="formData.relaId" placeholder="请输入关联类型对应的id"  allow-clear ></a-input>
-							</a-form-item>
-						</a-col>
-						<a-col :span="24">
-							<a-form-item label="提醒对应的标题文本" v-bind="validateInfos.title" id="AlarmForm-title" name="title">
-								<a-input v-model:value="formData.title" placeholder="请输入提醒对应的标题文本"  allow-clear ></a-input>
-							</a-form-item>
-						</a-col>
-						<a-col :span="24">
-							<a-form-item label="描述" v-bind="validateInfos.descTxt" id="AlarmForm-descTxt" name="descTxt">
-								<a-textarea v-model:value="formData.descTxt" :rows="4" placeholder="请输入描述" />
-							</a-form-item>
-						</a-col>
-						<a-col :span="24">
-							<a-form-item label="是否重复" v-bind="validateInfos.isRepeat" id="AlarmForm-isRepeat" name="isRepeat">
-								<j-switch v-model:value="formData.isRepeat" :options="[1,2]" ></j-switch>
-							</a-form-item>
-						</a-col>
-						<a-col :span="24">
-							<a-form-item label="是否启用" v-bind="validateInfos.isOpen" id="AlarmForm-isOpen" name="isOpen">
+							<a-form-item label="是否启用" v-bind="validateInfos.isOpen" id="FavoriteForm-isOpen" name="isOpen">
 								<j-switch v-model:value="formData.isOpen" :options="[1,2]" ></j-switch>
-							</a-form-item>
-						</a-col>
-						<a-col :span="24">
-							<a-form-item label="是否完成" v-bind="validateInfos.isFinish" id="AlarmForm-isFinish" name="isFinish">
-								<j-switch v-model:value="formData.isFinish" :options="[1,2]" ></j-switch>
 							</a-form-item>
 						</a-col>
           </a-row>
@@ -68,7 +43,7 @@
   import JDictSelectTag from '/@/components/Form/src/jeecg/components/JDictSelectTag.vue';
   import JSwitch from '/@/components/Form/src/jeecg/components/JSwitch.vue';
   import { getValueType } from '/@/utils';
-  import { saveOrUpdate } from '../Alarm.api';
+  import { saveOrUpdate } from '../Favorite.api';
   import { Form } from 'ant-design-vue';
   import JFormContainer from '/@/components/Form/src/container/JFormContainer.vue';
   const props = defineProps({
@@ -82,15 +57,10 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     deviceId: '',   
-    alarmTime: '',   
-    alarmDate: undefined,
-    relaType: undefined,
-    relaId: '',   
+    favType: undefined,
     title: '',   
-    descTxt: '',   
-    isRepeat: undefined,
+    txt: '',   
     isOpen: undefined,
-    isFinish: undefined,
   });
   const { createMessage } = useMessage();
   const labelCol = ref<any>({ xs: { span: 24 }, sm: { span: 5 } });
@@ -99,7 +69,7 @@
   //表单验证
   const validatorRules = reactive({
     deviceId: [{ required: true, message: '请输入device_id!'},],
-    relaType: [{ required: true, message: '请输入关联的类型!'},],
+    favType: [{ required: true, message: '请输入关联的类型!'},],
   });
   const { resetFields, validate, validateInfos } = useForm(formData, validatorRules, { immediate: false });
 

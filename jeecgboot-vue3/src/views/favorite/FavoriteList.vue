@@ -11,9 +11,9 @@
     <BasicTable @register="registerTable" :rowSelection="rowSelection">
       <!--插槽:table标题-->
       <template #tableTitle>
-        <a-button type="primary" v-auth="'alarm:alarm:add'"  @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
-        <a-button  type="primary" v-auth="'alarm:alarm:exportXls'" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
-        <j-upload-button  type="primary" v-auth="'alarm:alarm:importExcel'"  preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
+        <a-button type="primary" v-auth="'favorite:favorite:add'"  @click="handleAdd" preIcon="ant-design:plus-outlined"> 新增</a-button>
+        <a-button  type="primary" v-auth="'favorite:favorite:exportXls'" preIcon="ant-design:export-outlined" @click="onExportXls"> 导出</a-button>
+        <j-upload-button  type="primary" v-auth="'favorite:favorite:importExcel'"  preIcon="ant-design:import-outlined" @click="onImportXls">导入</j-upload-button>
         <a-dropdown v-if="selectedRowKeys.length > 0">
           <template #overlay>
             <a-menu>
@@ -23,7 +23,7 @@
               </a-menu-item>
             </a-menu>
           </template>
-          <a-button v-auth="'alarm:alarm:deleteBatch'">批量操作
+          <a-button v-auth="'favorite:favorite:deleteBatch'">批量操作
             <Icon icon="mdi:chevron-down"></Icon>
           </a-button>
         </a-dropdown>
@@ -38,18 +38,18 @@
       </template>
     </BasicTable>
     <!-- 表单区域 -->
-    <AlarmModal ref="registerModal" @success="handleSuccess"></AlarmModal>
+    <FavoriteModal ref="registerModal" @success="handleSuccess"></FavoriteModal>
   </div>
 </template>
 
-<script lang="ts" name="alarm-alarm" setup>
+<script lang="ts" name="favorite-favorite" setup>
   import { ref, reactive } from 'vue';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useListPage } from '/@/hooks/system/useListPage';
-  import { columns, superQuerySchema } from './Alarm.data';
-  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './Alarm.api';
+  import { columns, superQuerySchema } from './Favorite.data';
+  import { list, deleteOne, batchDelete, getImportUrl, getExportUrl } from './Favorite.api';
   import { downloadFile } from '/@/utils/common/renderUtils';
-  import AlarmModal from './components/AlarmModal.vue'
+  import FavoriteModal from './components/FavoriteModal.vue'
   import { useUserStore } from '/@/store/modules/user';
   import JSwitch from '/@/components/Form/src/jeecg/components/JSwitch.vue';
 
@@ -61,7 +61,7 @@
   //注册table数据
   const { prefixCls, tableContext, onExportXls, onImportXls } = useListPage({
     tableProps: {
-      title: 'alarm',
+      title: 'favorite',
       api: list,
       columns,
       canResize:false,
@@ -75,7 +75,7 @@
       },
     },
     exportConfig: {
-      name: "alarm",
+      name: "favorite",
       url: getExportUrl,
       params: queryParam,
     },
@@ -162,7 +162,7 @@
       {
         label: '编辑',
         onClick: handleEdit.bind(null, record),
-        auth: 'alarm:alarm:edit'
+        auth: 'favorite:favorite:edit'
       },
     ];
   }
@@ -182,7 +182,7 @@
           confirm: handleDelete.bind(null, record),
           placement: 'topLeft',
         },
-        auth: 'alarm:alarm:delete'
+        auth: 'favorite:favorite:delete'
       }
     ]
   }

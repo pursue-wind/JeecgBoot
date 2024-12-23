@@ -1,4 +1,4 @@
-package org.jeecg.modules.demo.alarm.controller;
+package org.jeecg.modules.demo.favorite.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,8 +14,8 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.query.QueryRuleEnum;
 import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.demo.alarm.entity.Alarm;
-import org.jeecg.modules.demo.alarm.service.IAlarmService;
+import org.jeecg.modules.demo.favorite.entity.Favorite;
+import org.jeecg.modules.demo.favorite.service.IFavoriteService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -40,68 +40,68 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 
  /**
- * @Description: alarm
+ * @Description: favorite
  * @Author: jeecg-boot
- * @Date:   2024-12-22
+ * @Date:   2024-12-23
  * @Version: V1.0
  */
-@Api(tags="alarm")
+@Api(tags="favorite")
 @RestController
-@RequestMapping("/alarm/alarm")
+@RequestMapping("/favorite/favorite")
 @Slf4j
-public class AlarmController extends JeecgController<Alarm, IAlarmService> {
+public class FavoriteController extends JeecgController<Favorite, IFavoriteService> {
 	@Autowired
-	private IAlarmService alarmService;
+	private IFavoriteService favoriteService;
 	
 	/**
 	 * 分页列表查询
 	 *
-	 * @param alarm
+	 * @param favorite
 	 * @param pageNo
 	 * @param pageSize
 	 * @param req
 	 * @return
 	 */
-	//@AutoLog(value = "alarm-分页列表查询")
-	@ApiOperation(value="alarm-分页列表查询", notes="alarm-分页列表查询")
+	//@AutoLog(value = "favorite-分页列表查询")
+	@ApiOperation(value="favorite-分页列表查询", notes="favorite-分页列表查询")
 	@GetMapping(value = "/list")
-	public Result<IPage<Alarm>> queryPageList(Alarm alarm,
+	public Result<IPage<Favorite>> queryPageList(Favorite favorite,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
-        QueryWrapper<Alarm> queryWrapper = QueryGenerator.initQueryWrapper(alarm, req.getParameterMap());
-		Page<Alarm> page = new Page<Alarm>(pageNo, pageSize);
-		IPage<Alarm> pageList = alarmService.page(page, queryWrapper);
+        QueryWrapper<Favorite> queryWrapper = QueryGenerator.initQueryWrapper(favorite, req.getParameterMap());
+		Page<Favorite> page = new Page<Favorite>(pageNo, pageSize);
+		IPage<Favorite> pageList = favoriteService.page(page, queryWrapper);
 		return Result.OK(pageList);
 	}
 	
 	/**
 	 *   添加
 	 *
-	 * @param alarm
+	 * @param favorite
 	 * @return
 	 */
-	@AutoLog(value = "alarm-添加")
-	@ApiOperation(value="alarm-添加", notes="alarm-添加")
-	@RequiresPermissions("alarm:alarm:add")
+	@AutoLog(value = "favorite-添加")
+	@ApiOperation(value="favorite-添加", notes="favorite-添加")
+	@RequiresPermissions("favorite:favorite:add")
 	@PostMapping(value = "/add")
-	public Result<String> add(@RequestBody Alarm alarm) {
-		alarmService.save(alarm);
+	public Result<String> add(@RequestBody Favorite favorite) {
+		favoriteService.save(favorite);
 		return Result.OK("添加成功！");
 	}
 	
 	/**
 	 *  编辑
 	 *
-	 * @param alarm
+	 * @param favorite
 	 * @return
 	 */
-	@AutoLog(value = "alarm-编辑")
-	@ApiOperation(value="alarm-编辑", notes="alarm-编辑")
-	@RequiresPermissions("alarm:alarm:edit")
+	@AutoLog(value = "favorite-编辑")
+	@ApiOperation(value="favorite-编辑", notes="favorite-编辑")
+	@RequiresPermissions("favorite:favorite:edit")
 	@RequestMapping(value = "/edit", method = {RequestMethod.PUT,RequestMethod.POST})
-	public Result<String> edit(@RequestBody Alarm alarm) {
-		alarmService.updateById(alarm);
+	public Result<String> edit(@RequestBody Favorite favorite) {
+		favoriteService.updateById(favorite);
 		return Result.OK("编辑成功!");
 	}
 	
@@ -111,12 +111,12 @@ public class AlarmController extends JeecgController<Alarm, IAlarmService> {
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "alarm-通过id删除")
-	@ApiOperation(value="alarm-通过id删除", notes="alarm-通过id删除")
-	@RequiresPermissions("alarm:alarm:delete")
+	@AutoLog(value = "favorite-通过id删除")
+	@ApiOperation(value="favorite-通过id删除", notes="favorite-通过id删除")
+	@RequiresPermissions("favorite:favorite:delete")
 	@DeleteMapping(value = "/delete")
 	public Result<String> delete(@RequestParam(name="id",required=true) String id) {
-		alarmService.removeById(id);
+		favoriteService.removeById(id);
 		return Result.OK("删除成功!");
 	}
 	
@@ -126,12 +126,12 @@ public class AlarmController extends JeecgController<Alarm, IAlarmService> {
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "alarm-批量删除")
-	@ApiOperation(value="alarm-批量删除", notes="alarm-批量删除")
-	@RequiresPermissions("alarm:alarm:deleteBatch")
+	@AutoLog(value = "favorite-批量删除")
+	@ApiOperation(value="favorite-批量删除", notes="favorite-批量删除")
+	@RequiresPermissions("favorite:favorite:deleteBatch")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<String> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		this.alarmService.removeByIds(Arrays.asList(ids.split(",")));
+		this.favoriteService.removeByIds(Arrays.asList(ids.split(",")));
 		return Result.OK("批量删除成功!");
 	}
 	
@@ -141,27 +141,27 @@ public class AlarmController extends JeecgController<Alarm, IAlarmService> {
 	 * @param id
 	 * @return
 	 */
-	//@AutoLog(value = "alarm-通过id查询")
-	@ApiOperation(value="alarm-通过id查询", notes="alarm-通过id查询")
+	//@AutoLog(value = "favorite-通过id查询")
+	@ApiOperation(value="favorite-通过id查询", notes="favorite-通过id查询")
 	@GetMapping(value = "/queryById")
-	public Result<Alarm> queryById(@RequestParam(name="id",required=true) String id) {
-		Alarm alarm = alarmService.getById(id);
-		if(alarm==null) {
+	public Result<Favorite> queryById(@RequestParam(name="id",required=true) String id) {
+		Favorite favorite = favoriteService.getById(id);
+		if(favorite==null) {
 			return Result.error("未找到对应数据");
 		}
-		return Result.OK(alarm);
+		return Result.OK(favorite);
 	}
 
     /**
     * 导出excel
     *
     * @param request
-    * @param alarm
+    * @param favorite
     */
-    @RequiresPermissions("alarm:alarm:exportXls")
+    @RequiresPermissions("favorite:favorite:exportXls")
     @RequestMapping(value = "/exportXls")
-    public ModelAndView exportXls(HttpServletRequest request, Alarm alarm) {
-        return super.exportXls(request, alarm, Alarm.class, "alarm");
+    public ModelAndView exportXls(HttpServletRequest request, Favorite favorite) {
+        return super.exportXls(request, favorite, Favorite.class, "favorite");
     }
 
     /**
@@ -171,10 +171,10 @@ public class AlarmController extends JeecgController<Alarm, IAlarmService> {
     * @param response
     * @return
     */
-    @RequiresPermissions("alarm:alarm:importExcel")
+    @RequiresPermissions("favorite:favorite:importExcel")
     @RequestMapping(value = "/importExcel", method = RequestMethod.POST)
     public Result<?> importExcel(HttpServletRequest request, HttpServletResponse response) {
-        return super.importExcel(request, response, Alarm.class);
+        return super.importExcel(request, response, Favorite.class);
     }
 
 }

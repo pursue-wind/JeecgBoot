@@ -36,6 +36,11 @@ export const columns: BasicColumn[] = [
     dataIndex: 'title'
   },
   {
+    title: '描述',
+    align: "center",
+    dataIndex: 'descTxt'
+  },
+  {
     title: '是否重复',
     align: "center",
     dataIndex: 'isRepeat',
@@ -52,21 +57,25 @@ export const columns: BasicColumn[] = [
      },
   },
   {
-    title: '描述',
+    title: '是否完成',
     align: "center",
-    dataIndex: 'descTxt'
+    dataIndex: 'isFinish',
+    customRender:({text}) => {
+       return  render.renderSwitch(text, [{text:'是',value:'1'},{text:'否',value:'2'}]);
+     },
   },
 ];
 
 // 高级查询数据
 export const superQuerySchema = {
   deviceId: {title: 'device_id',order: 0,view: 'text', type: 'string',},
-  alarmTime: {title: '提醒时间',order: 1,view: 'time', type: 'string',},
+  alarmTime: {title: '提醒时间',order: 1,view: 'text', type: 'string',},
   alarmDate: {title: '周一到周日分别对应 2 4 8 16 32 64 128',order: 2,view: 'number', type: 'number',},
   relaType: {title: '关联的类型',order: 3,view: 'number', type: 'number',dictCode: 'alarm_type',},
   relaId: {title: '关联类型对应的id',order: 4,view: 'text', type: 'string',},
   title: {title: '提醒对应的标题文本',order: 5,view: 'text', type: 'string',},
-  isRepeat: {title: '是否重复',order: 6,view: 'number', type: 'number',},
-  isOpen: {title: '是否启用',order: 7,view: 'switch', type: 'string',},
-  descTxt: {title: '描述',order: 8,view: 'textarea', type: 'string',},
+  descTxt: {title: '描述',order: 6,view: 'textarea', type: 'string',},
+  isRepeat: {title: '是否重复',order: 7,view: 'number', type: 'number',},
+  isOpen: {title: '是否启用',order: 8,view: 'number', type: 'number',},
+  isFinish: {title: '是否完成',order: 9,view: 'number', type: 'number',},
 };
