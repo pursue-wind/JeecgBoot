@@ -109,8 +109,13 @@ public class RegController {
         SysUser sysUser1 = sysUserService.getUserByName(deviceId);
         if (sysUser1 != null) {
             result.setMessage("用户名已注册");
-            result.setSuccess(false);
-            return result;
+            String passwordDecode = PasswordUtil.decrypt(sysUser1.getUsername(), sysUser1.getPassword(), sysUser1.getSalt());
+            result.setSuccess(true);
+            Map<String, Object> data = ImmutableMap.of(
+                    "ak", deviceId,
+                    "sk", passwordDecode
+            );
+            return Result.OK(new JSONObject(data));
         }
 
         try {
