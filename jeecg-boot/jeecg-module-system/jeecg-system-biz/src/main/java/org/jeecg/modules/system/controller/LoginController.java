@@ -540,7 +540,7 @@ public class LoginController {
 		result.success("登录成功");
 		return result;
 	}
-	private Result<JSONObject> userInfo2(SysUser sysUser, Result<JSONObject> result, HttpServletRequest request) {
+	public Result<JSONObject> userInfo2(SysUser sysUser, Result<JSONObject> result, HttpServletRequest request) {
 		String username = sysUser.getUsername();
 		String syspassword = sysUser.getPassword();
 		// 获取用户部门信息

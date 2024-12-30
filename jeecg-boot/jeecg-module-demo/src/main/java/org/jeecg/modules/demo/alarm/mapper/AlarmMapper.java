@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: alarm
  * @Author: jeecg-boot
- * @Date:   2024-12-22
+ * @Date:   2024-12-28
  * @Version: V1.0
  */
 public interface AlarmMapper extends BaseMapper<Alarm> {

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * @Description: alarm
  * @Author: jeecg-boot
- * @Date:   2024-12-22
+ * @Date:   2024-12-28
  * @Version: V1.0
  */
 public interface IAlarmService extends IService<Alarm> {

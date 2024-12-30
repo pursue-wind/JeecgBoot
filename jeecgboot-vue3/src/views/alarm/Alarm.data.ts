@@ -69,7 +69,7 @@ export const columns: BasicColumn[] = [
 // 高级查询数据
 export const superQuerySchema = {
   deviceId: {title: 'device_id',order: 0,view: 'text', type: 'string',},
-  alarmTime: {title: '提醒时间',order: 1,view: 'text', type: 'string',},
+  alarmTime: {title: '提醒时间',order: 1,view: 'number', type: 'number',},
   alarmDate: {title: '周一到周日分别对应 2 4 8 16 32 64 128',order: 2,view: 'number', type: 'number',},
   relaType: {title: '关联的类型',order: 3,view: 'number', type: 'number',dictCode: 'alarm_type',},
   relaId: {title: '关联类型对应的id',order: 4,view: 'text', type: 'string',},

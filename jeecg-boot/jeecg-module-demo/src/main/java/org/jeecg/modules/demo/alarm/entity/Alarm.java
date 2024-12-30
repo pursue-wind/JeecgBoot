@@ -23,7 +23,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description: alarm
  * @Author: jeecg-boot
- * @Date:   2024-12-22
+ * @Date:   2024-12-28
  * @Version: V1.0
  */
 @Data
@@ -55,7 +55,7 @@ public class Alarm implements Serializable {
 	/**提醒时间*/
 	@Excel(name = "提醒时间", width = 15)
     @ApiModelProperty(value = "提醒时间")
-    private java.lang.String alarmTime;
+    private java.lang.Integer alarmTime;
 	/**周一到周日分别对应 2 4 8 16 32 64 128*/
 	@Excel(name = "周一到周日分别对应 2 4 8 16 32 64 128", width = 15)
     @ApiModelProperty(value = "周一到周日分别对应 2 4 8 16 32 64 128")

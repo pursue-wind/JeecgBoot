@@ -11,7 +11,7 @@
 						</a-col>
 						<a-col :span="24">
 							<a-form-item label="提醒时间" v-bind="validateInfos.alarmTime" id="AlarmForm-alarmTime" name="alarmTime">
-								<a-input v-model:value="formData.alarmTime" placeholder="请输入提醒时间"  allow-clear ></a-input>
+								<a-input-number v-model:value="formData.alarmTime" placeholder="请输入提醒时间" style="width: 100%" />
 							</a-form-item>
 						</a-col>
 						<a-col :span="24">
@@ -82,7 +82,7 @@
   const formData = reactive<Record<string, any>>({
     id: '',
     deviceId: '',   
-    alarmTime: '',   
+    alarmTime: undefined,
     alarmDate: undefined,
     relaType: undefined,
     relaId: '',   
