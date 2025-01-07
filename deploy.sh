@@ -20,7 +20,7 @@ deploy_backend() {
     cd /root/idea/JeecgBoot/jeecg-boot || error_exit "后端路径不存在！"
 
     log "执行 Maven 打包..."
-    if mvn package; then
+    if mvn clean package; then
         log "Maven 打包成功。"
     else
         error_exit "Maven 打包失败！"

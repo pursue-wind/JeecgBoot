@@ -152,6 +152,7 @@ public class RegController {
             user.setActivitiSync(CommonConstant.ACT_SYNC_1);
             sysUserService.addUserWithRole(user, "1169504891467464705");//默认临时角色 test
             Devices entity = new Devices();
+            entity.setId(deviceId);
             entity.setDeviceId(deviceId);
             entity.setOpenId(openId);
             entity.setCreateTime(new Date());
@@ -226,17 +227,11 @@ public class RegController {
         }
         Result<JSONObject> result2 = new Result<JSONObject>();
 
-
-        Object jwtToken = redisUtil.get(CommonConstant.EXIST_USER_TOKEN + cus + "_" + openId);
-        if (jwtToken == null || jwtToken.equals("")) {
-            log.info("not found jwtToken wcLogin: {}", jwtToken);
-
-            Result<JSONObject> jsonObjectResult = userInfo2(sysUser1, result2);
-            jwtToken = jsonObjectResult.getResult().get("token");
-            log.info("re gen jwtToken wcLogin: {}", jwtToken);
-            redisUtil.set(CommonConstant.EXIST_USER_TOKEN + cus + "_" + openId, jwtToken);
-            redisUtil.expire(CommonConstant.EXIST_USER_TOKEN + cus + "_" + openId, JwtUtil.EXPIRE_TIME * 2 / 1000);
-        }
+        Result<JSONObject> jsonObjectResult = userInfo2(sysUser1, result2);
+        Object jwtToken = jsonObjectResult.getResult().get("token");
+        log.info("re gen jwtToken wcLogin: {}", jwtToken);
+        redisUtil.set(CommonConstant.EXIST_USER_TOKEN + cus + "_" + openId, jwtToken);
+        redisUtil.expire(CommonConstant.EXIST_USER_TOKEN + cus + "_" + openId, JwtUtil.EXPIRE_TIME * 2 / 1000);
 
         Map<String, Object> data = ImmutableMap.of(
                 "iot", iot,
